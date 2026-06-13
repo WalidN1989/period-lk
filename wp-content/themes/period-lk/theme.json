@@ -4,21 +4,27 @@
   "settings": {
     "color": {
       "palette": [
-        { "slug": "primary",       "color": "#C2185B", "name": "Primary" },
-        { "slug": "primary-dark",  "color": "#880E4F", "name": "Primary Dark" },
-        { "slug": "primary-light", "color": "#F48FB1", "name": "Primary Light" },
-        { "slug": "surface",       "color": "#FFF5F7", "name": "Surface" },
-        { "slug": "text",          "color": "#1A1A2E", "name": "Text" },
-        { "slug": "text-muted",    "color": "#5C5C72", "name": "Text Muted" },
+        { "slug": "primary",       "color": "#3f2200", "name": "Primary" },
+        { "slug": "primary-dark",  "color": "#2a1600", "name": "Primary Dark" },
+        { "slug": "secondary",     "color": "#765933", "name": "Secondary" },
+        { "slug": "accent",        "color": "#FCE9DB", "name": "Accent Gold" },
+        { "slug": "surface",       "color": "#F9F9F9", "name": "Surface" },
+        { "slug": "text",          "color": "#1A1C1C", "name": "Text" },
+        { "slug": "text-muted",    "color": "#50453A", "name": "Text Muted" },
         { "slug": "white",         "color": "#FFFFFF", "name": "White" }
       ]
     },
     "typography": {
+      "fontFamilies": [
+        { "slug": "body", "fontFamily": "\"Plus Jakarta Sans\", -apple-system, \"Segoe UI\", system-ui, sans-serif", "name": "Body" },
+        { "slug": "heading", "fontFamily": "\"Bodoni Moda\", Georgia, serif", "name": "Heading" }
+      ],
       "fontSizes": [
         { "slug": "small",  "size": "0.875rem", "name": "Small"  },
         { "slug": "normal", "size": "1rem",     "name": "Normal" },
         { "slug": "large",  "size": "1.25rem",  "name": "Large"  },
-        { "slug": "x-large","size": "1.5rem",   "name": "X-Large"}
+        { "slug": "x-large","size": "1.5rem",   "name": "X-Large"},
+        { "slug": "hero",   "size": "2.5rem",   "name": "Hero" }
       ],
       "customFontSize": false,
       "dropCap": false
@@ -33,13 +39,13 @@
   },
   "styles": {
     "color": {
-      "background": "#FFFFFF",
-      "text": "#1A1A2E"
+      "background": "#F9F9F9",
+      "text": "#1A1C1C"
     },
     "typography": {
-      "fontFamily": "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      "fontFamily": "\"Plus Jakarta Sans\", -apple-system, \"Segoe UI\", system-ui, sans-serif",
       "fontSize": "1rem",
-      "lineHeight": "1.65"
+      "lineHeight": "1.6"
     }
   }
 }
