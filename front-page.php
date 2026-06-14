@@ -6,22 +6,17 @@
  * Otherwise we show the native Sojourn design homepage.
  */
 
-// Let Elementor take full control if it is managing the front page
-if ( function_exists( 'elementor_theme_do_location' ) && elementor_theme_do_location( 'single' ) ) {
-    return;
-}
-
 get_header();
 
-$front_id  = get_option( 'page_on_front' );
-$el_data   = get_post_meta( $front_id, '_elementor_data', true );
-$has_el    = ! empty( $el_data ) && $el_data !== '[]'
-             && get_post_meta( $front_id, '_elementor_edit_mode', true ) === 'builder';
+$front_id   = get_option( 'page_on_front' );
+$el_data    = get_post_meta( $front_id, '_elementor_data', true );
+$has_el     = ! empty( $el_data ) && $el_data !== '[]'
+              && get_post_meta( $front_id, '_elementor_edit_mode', true ) === 'builder';
 $is_preview = defined( 'ELEMENTOR_VERSION' )
-             && \Elementor\Plugin::$instance->preview->is_preview_mode();
+              && \Elementor\Plugin::$instance->preview->is_preview_mode();
 
 if ( $has_el || $is_preview ) :
-    /* ── Elementor-managed homepage ────────────────────────── */
+    /* ── Elementor-managed homepage (only when Elementor data exists) ── */
     while ( have_posts() ) : the_post();
         the_content();
     endwhile;
