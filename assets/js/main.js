@@ -13,15 +13,43 @@
   /* ── Mobile menu toggle ────────────────────────────────────── */
   const menuToggle = document.querySelector('.js-menu-toggle');
   const mobileNav  = document.getElementById('mobile-nav');
-  if (menuToggle && mobileNav) {
+  const iconMenu   = menuToggle && menuToggle.querySelector('.icon-menu');
+  const iconClose  = menuToggle && menuToggle.querySelector('.icon-close');
+
+  function openMenu() {
+    if (!mobileNav) return;
+    mobileNav.removeAttribute('hidden');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    if (iconMenu)  iconMenu.style.display  = 'none';
+    if (iconClose) iconClose.style.display = '';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    if (!mobileNav) return;
+    mobileNav.setAttribute('hidden', '');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    if (iconMenu)  iconMenu.style.display  = '';
+    if (iconClose) iconClose.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  if (menuToggle) {
     menuToggle.addEventListener('click', () => {
-      const isOpen = mobileNav.hidden === false;
-      mobileNav.hidden = isOpen;
-      menuToggle.setAttribute('aria-expanded', String(!isOpen));
-      document.querySelector('.icon-menu').style.display = isOpen ? '' : 'none';
-      document.querySelector('.icon-close').style.display = isOpen ? 'none' : '';
+      const isOpen = !mobileNav.hasAttribute('hidden');
+      isOpen ? closeMenu() : openMenu();
     });
   }
+
+  /* Close menu on nav link click */
+  if (mobileNav) {
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  }
+
+  /* Close on Escape */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeMenu(); closeSearch(); }
+  });
 
   /* ── Search overlay ─────────────────────────────────────────── */
   const searchToggle  = document.querySelector('.js-search-toggle');
@@ -30,14 +58,14 @@
 
   function openSearch() {
     if (!searchOverlay) return;
-    searchOverlay.hidden = false;
+    searchOverlay.removeAttribute('hidden');
     searchToggle && searchToggle.setAttribute('aria-expanded', 'true');
     const field = searchOverlay.querySelector('.search-field');
     if (field) setTimeout(() => field.focus(), 50);
   }
   function closeSearch() {
     if (!searchOverlay) return;
-    searchOverlay.hidden = true;
+    searchOverlay.setAttribute('hidden', '');
     searchToggle && searchToggle.setAttribute('aria-expanded', 'false');
   }
 
@@ -46,9 +74,8 @@
   if (searchOverlay) {
     searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) closeSearch(); });
   }
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
 
-  /* ── WooCommerce cart badge live update ─────────────────────── */
+  /* ── WooCommerce cart badge ─────────────────────────────────── */
   $(document.body).on('wc_fragments_refreshed added_to_cart removed_from_cart', function () {
     const badge = document.querySelector('.cart-badge');
     if (!badge || typeof wc_cart_params === 'undefined') return;
@@ -57,4 +84,4 @@
     badge.classList.toggle('is-visible', count > 0);
   });
 
-}(window.jQuery || { fn: {}, on: () => {} }));
+}(window.jQuery || { fn: {}, on: function() {} }));
