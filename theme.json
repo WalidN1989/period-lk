@@ -4,48 +4,57 @@
   "settings": {
     "color": {
       "palette": [
-        { "slug": "primary",       "color": "#3f2200", "name": "Primary" },
-        { "slug": "primary-dark",  "color": "#2a1600", "name": "Primary Dark" },
-        { "slug": "secondary",     "color": "#765933", "name": "Secondary" },
-        { "slug": "accent",        "color": "#FCE9DB", "name": "Accent Gold" },
-        { "slug": "surface",       "color": "#F9F9F9", "name": "Surface" },
-        { "slug": "text",          "color": "#1A1C1C", "name": "Text" },
-        { "slug": "text-muted",    "color": "#50453A", "name": "Text Muted" },
-        { "slug": "white",         "color": "#FFFFFF", "name": "White" }
+        { "name": "Wine",          "slug": "wine",          "color": "#6a1b2a" },
+        { "name": "Wine deep",     "slug": "wine-deep",     "color": "#45101b" },
+        { "name": "Blush",         "slug": "blush",         "color": "#f7e6ea" },
+        { "name": "Cream",         "slug": "cream",         "color": "#fbf2ea" },
+        { "name": "Canvas",        "slug": "canvas",        "color": "#fffdfb" },
+        { "name": "Ink",           "slug": "ink",           "color": "#2a1216" },
+        { "name": "Body",          "slug": "body",          "color": "#5c474c" },
+        { "name": "Muted",         "slug": "muted",         "color": "#8c757a" },
+        { "name": "Gold",          "slug": "gold",          "color": "#c08a3e" },
+        { "name": "Sale red",      "slug": "sale",          "color": "#b3253a" },
+        { "name": "On primary",    "slug": "on-primary",    "color": "#fff7f3" }
       ]
     },
     "typography": {
       "fontFamilies": [
-        { "slug": "body", "fontFamily": "\"Plus Jakarta Sans\", -apple-system, \"Segoe UI\", system-ui, sans-serif", "name": "Body" },
-        { "slug": "heading", "fontFamily": "\"Bodoni Moda\", Georgia, serif", "name": "Heading" }
-      ],
-      "fontSizes": [
-        { "slug": "small",  "size": "0.875rem", "name": "Small"  },
-        { "slug": "normal", "size": "1rem",     "name": "Normal" },
-        { "slug": "large",  "size": "1.25rem",  "name": "Large"  },
-        { "slug": "x-large","size": "1.5rem",   "name": "X-Large"},
-        { "slug": "hero",   "size": "2.5rem",   "name": "Hero" }
-      ],
-      "customFontSize": false,
-      "dropCap": false
-    },
-    "spacing": {
-      "units": ["px", "rem", "%", "vw"]
+        {
+          "name": "Playfair Display",
+          "slug": "serif",
+          "fontFamily": "\"Playfair Display\", \"Hoefler Text\", Georgia, serif"
+        },
+        {
+          "name": "Hanken Grotesk",
+          "slug": "sans",
+          "fontFamily": "\"Hanken Grotesk\", -apple-system, system-ui, \"Segoe UI\", Roboto, sans-serif"
+        }
+      ]
     },
     "layout": {
-      "contentSize": "720px",
+      "contentSize": "920px",
       "wideSize": "1200px"
-    }
+    },
+    "spacing": {
+      "units": ["px", "em", "rem", "%", "vw"]
+    },
+    "useRootPaddingAwareAlignments": true
   },
   "styles": {
     "color": {
-      "background": "#F9F9F9",
-      "text": "#1A1C1C"
+      "background": "#fffdfb",
+      "text": "#5c474c"
     },
     "typography": {
-      "fontFamily": "\"Plus Jakarta Sans\", -apple-system, \"Segoe UI\", system-ui, sans-serif",
-      "fontSize": "1rem",
-      "lineHeight": "1.6"
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "16px",
+      "lineHeight": "1.55"
+    },
+    "elements": {
+      "h1": { "typography": { "fontFamily": "var(--font-serif)", "fontWeight": "600", "color": "#2a1216" } },
+      "h2": { "typography": { "fontFamily": "var(--font-serif)", "fontWeight": "600", "color": "#2a1216" } },
+      "h3": { "typography": { "fontFamily": "var(--font-serif)", "fontWeight": "600", "color": "#2a1216" } },
+      "link": { "color": { "text": "#6a1b2a" } }
     }
   }
 }

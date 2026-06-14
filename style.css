@@ -1,13 +1,112 @@
 /*
-Theme Name: Fearless & Female
-Theme URI: https://panties.period.lk
-Author: Fearless & Female
-Author URI: https://panties.period.lk
-Description: Premium period care & intimate wellness WordPress theme. Fearless & Female brings luxury, design, and empowerment to women's wellness in Sri Lanka.
-Version: 2.0.0
-Requires at least: 6.0
-Tested up to: 6.7
-Requires PHP: 8.0
-License: Proprietary
+Theme Name:  period.lk
+Theme URI:   https://panties.period.lk
+Description: Premium period-positive e-commerce for Sri Lanka. Wine-led editorial design — Playfair Display headlines, Hanken Grotesk UI, blush/cream surfaces, WooCommerce + Elementor + Rank Math ready.
+Version:     3.0.0
+Author:      period.lk
 Text Domain: period-lk
+Tags:        e-commerce, woocommerce, elementor, sri-lanka, period-care
+Requires at least: 6.4
+Requires PHP: 8.1
+WC requires at least: 8.0
+WC tested up to: 10.8
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
+
+/* ═══════════════════════════════════════
+   DESIGN SYSTEM — Sojourn / period.lk
+   ═══════════════════════════════════════ */
+
+:root {
+  /* ── Colors: Wine ── */
+  --color-primary:          #6a1b2a;
+  --color-primary-active:   #4d111d;
+  --color-primary-disabled: #d8b6bd;
+  --color-wine:             #6a1b2a;
+  --color-wine-deep:        #45101b;
+  --color-wine-soft:        #8a3142;
+
+  /* ── Colors: Accents ── */
+  --color-rose:             #c06b7e;
+  --color-blush:            #f7e6ea;
+  --color-blush-strong:     #efcfd6;
+  --color-cream:            #fbf2ea;
+  --color-gold:             #c08a3e;
+
+  /* ── Colors: Surfaces ── */
+  --color-canvas:           #fffdfb;
+  --color-surface-soft:     #faf2ee;
+  --color-surface-strong:   #f3e6e6;
+
+  /* ── Colors: Borders ── */
+  --color-hairline:         #ecdde0;
+  --color-hairline-soft:    #f4eaec;
+  --color-border-strong:    #cbb2b7;
+
+  /* ── Colors: Text ── */
+  --color-ink:              #2a1216;
+  --color-body:             #5c474c;
+  --color-muted:            #8c757a;
+  --color-muted-soft:       #b6a3a7;
+  --color-on-primary:       #fff7f3;
+  --color-on-wine-muted:    #e7c9d0;
+  --color-star-rating:      #c08a3e;
+
+  /* ── Colors: Semantic ── */
+  --color-sale:             #b3253a;
+  --color-error:            #b3253a;
+  --color-success:          #2f7d5b;
+  --color-legal-link:       #8a3142;
+  --scrim-bg:               rgba(42,18,22,.45);
+
+  /* ── Aliases ── */
+  --text-strong:   var(--color-ink);
+  --text-body:     var(--color-body);
+  --text-muted:    var(--color-muted);
+  --surface-page:  var(--color-canvas);
+  --border-default:var(--color-hairline);
+  --cta-bg:        var(--color-primary);
+  --cta-fg:        var(--color-on-primary);
+
+  /* ── Typography ── */
+  --font-serif:  "Playfair Display","Hoefler Text",Georgia,serif;
+  --font-sans:   "Hanken Grotesk",-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;
+
+  --type-display-2xl: 600 64px/1.02 var(--font-serif);
+  --type-display-xl:  600 48px/1.06 var(--font-serif);
+  --type-display-lg:  600 36px/1.10 var(--font-serif);
+  --type-display-md:  600 26px/1.15 var(--font-serif);
+  --type-display-sm:  600 21px/1.20 var(--font-serif);
+
+  --type-eyebrow-size:     12px;
+  --type-eyebrow-weight:   600;
+  --type-eyebrow-tracking: 0.14em;
+
+  --type-body-lg:  400 18px/1.60 var(--font-sans);
+  --type-body-md:  400 16px/1.55 var(--font-sans);
+  --type-body-sm:  400 14px/1.45 var(--font-sans);
+  --type-price:    600 16px/1.2  var(--font-sans);
+  --type-nav:      500 15px/1.2  var(--font-sans);
+  --type-btn:      600 16px/1.2  var(--font-sans);
+
+  /* ── Spacing ── */
+  --space-xxs: 2px;  --space-xs: 4px;   --space-sm: 8px;
+  --space-md:  12px; --space-base:16px; --space-lg:  24px;
+  --space-xl:  32px; --space-xxl:48px;  --space-section:80px;
+  --gutter-grid:   24px;
+  --container:     1200px;
+  --container-wide:1360px;
+  --container-narrow:920px;
+
+  /* ── Radius ── */
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-xl:  32px;
+  --radius-full:9999px;
+
+  /* ── Elevation ── */
+  --shadow-card: 0 2px 12px rgba(106,27,42,.10),0 1px 3px rgba(106,27,42,.06);
+  --shadow-lg:   0 8px 32px rgba(106,27,42,.16),0 2px 8px rgba(106,27,42,.08);
+}
