@@ -70,11 +70,11 @@
           'fallback_cb'    => function () {
               echo '<ul class="nav-list">';
               $pages = [
-                  'Period Panties' => '/shop/period-panties/',
-                  'Period Care'    => '/shop/period-care/',
-                  'Lingerie'       => '/shop/lingerie/',
-                  'Gifts'          => '/shop/gifts/',
-                  'About'          => '/about/',
+                  'Period Panties' => '/product-category/period-panties/',
+                  'Period Care'    => '/product-category/period-care/',
+                  'Lingerie'       => '/product-category/lingerie/',
+                  'Shop'           => '/shop/',
+                  'Blog'           => '/blog/',
               ];
               foreach ( $pages as $label => $href ) {
                   printf( '<li><a href="%s">%s</a></li>', esc_url( home_url( $href ) ), esc_html( $label ) );
@@ -144,12 +144,11 @@
           'fallback_cb'    => function () {
               echo '<ul class="mobile-nav__list">';
               $pages = [
-                  'Period Panties' => '/shop/period-panties/',
-                  'Period Care'    => '/shop/period-care/',
-                  'Lingerie'       => '/shop/lingerie/',
-                  'Gifts'          => '/shop/gifts/',
-                  'About'          => '/about/',
-                  'Contact'        => '/contact/',
+                  'Period Panties' => '/product-category/period-panties/',
+                  'Period Care'    => '/product-category/period-care/',
+                  'Lingerie'       => '/product-category/lingerie/',
+                  'Shop'           => '/shop/',
+                  'Blog'           => '/blog/',
               ];
               foreach ( $pages as $label => $href ) {
                   printf( '<li><a href="%s">%s</a></li>', esc_url( home_url( $href ) ), esc_html( $label ) );
