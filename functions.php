@@ -127,6 +127,11 @@ add_filter( 'upload_mimes', function ( $mimes ) {
     return $mimes;
 } );
 
+/* ── Remove WooCommerce sidebar ─────────────────────────────── */
+add_action( 'init', function () {
+    remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+} );
+
 /* ── Performance ────────────────────────────────────────────── */
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head',             'print_emoji_detection_script', 7 );
