@@ -163,6 +163,18 @@ add_action( 'wp_enqueue_scripts', function () {
     }
 } );
 
+/* ── Archive / shop stylesheet ─────────────────────────────── */
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_shop() || is_product_category() || is_product_tag() ) {
+        wp_enqueue_style(
+            'period-lk-archive',
+            PERIOD_LK_URI . '/assets/css/archive.css',
+            [ 'period-lk-main' ],
+            PERIOD_LK_VERSION
+        );
+    }
+} );
+
 /* ── Product trust badges ──────────────────────────────────── */
 add_action( 'woocommerce_after_add_to_cart_button', function () {
     echo '<div class="product-trust-badges">';
