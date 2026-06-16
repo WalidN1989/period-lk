@@ -163,6 +163,18 @@ add_action( 'wp_enqueue_scripts', function () {
     }
 } );
 
+/* ── Blog / journal stylesheet ─────────────────────────────── */
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_home() || is_single() ) {
+        wp_enqueue_style(
+            'period-lk-blog',
+            PERIOD_LK_URI . '/assets/css/blog.css',
+            [ 'period-lk-main' ],
+            PERIOD_LK_VERSION
+        );
+    }
+} );
+
 /* ── Archive / shop stylesheet ─────────────────────────────── */
 add_action( 'wp_enqueue_scripts', function () {
     if ( is_shop() || is_product_category() || is_product_tag() ) {

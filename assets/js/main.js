@@ -75,6 +75,29 @@
     searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) closeSearch(); });
   }
 
+  /* ── Journal category filter ───────────────────────────────── */
+  const journalFilters = document.querySelectorAll('.journal-filter');
+  if (journalFilters.length) {
+    journalFilters.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const filter = this.dataset.filter;
+        journalFilters.forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        this.classList.add('is-active');
+        this.setAttribute('aria-selected', 'true');
+        document.querySelectorAll('.journal-card').forEach(function (card) {
+          if (filter === 'all' || card.classList.contains(filter)) {
+            card.classList.remove('is-hidden');
+          } else {
+            card.classList.add('is-hidden');
+          }
+        });
+      });
+    });
+  }
+
   /* ── WooCommerce cart badge ─────────────────────────────────── */
   $(document.body).on('wc_fragments_refreshed added_to_cart removed_from_cart', function () {
     const badge = document.querySelector('.cart-badge');
