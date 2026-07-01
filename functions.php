@@ -200,3 +200,43 @@ add_action( 'woocommerce_after_add_to_cart_button', function () {
     }
     echo '</div>';
 }, 15 );
+
+/* ── FAQ schema (invisible JSON-LD via Rank Math) ───────────────
+ * Injects a valid FAQPage node into Rank Math's JSON-LD graph for any
+ * singular post/page that has a `_periodlk_faq` meta (array of
+ * ['q'=>question,'a'=>answer]). Kept as an additive filter so Rank
+ * Math's auto-generated Article/BlogPosting graph stays intact.
+ * FAQ content must also be visible on the page (Google requirement).
+ */
+add_filter( 'rank_math/json_ld', function ( $data, $jsonld ) {
+    if ( ! is_singular() ) {
+        return $data;
+    }
+    $faq = get_post_meta( get_the_ID(), '_periodlk_faq', true );
+    if ( empty( $faq ) || ! is_array( $faq ) ) {
+        return $data;
+    }
+    $entities = [];
+    foreach ( $faq as $item ) {
+        if ( empty( $item['q'] ) || empty( $item['a'] ) ) {
+            continue;
+        }
+        $entities[] = [
+            '@type'          => 'Question',
+            'name'           => wp_strip_all_tags( $item['q'] ),
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text'  => wp_strip_all_tags( $item['a'] ),
+            ],
+        ];
+    }
+    if ( empty( $entities ) ) {
+        return $data;
+    }
+    $data['faqpage'] = [
+        '@type'      => 'FAQPage',
+        '@id'        => get_permalink() . '#faq',
+        'mainEntity' => $entities,
+    ];
+    return $data;
+}, 99, 2 );
