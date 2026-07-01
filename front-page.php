@@ -15,11 +15,19 @@ $has_el     = ! empty( $el_data ) && $el_data !== '[]'
 $is_preview = defined( 'ELEMENTOR_VERSION' )
               && \Elementor\Plugin::$instance->preview->is_preview_mode();
 
-if ( $has_el || $is_preview ) :
-    /* ── Elementor-managed homepage (only when Elementor data exists) ── */
+if ( $is_preview ) :
+    /* ── Elementor live-editor preview: let Elementor render in-place ── */
     while ( have_posts() ) : the_post();
         the_content();
     endwhile;
+
+elseif ( $has_el ) :
+    /* ── Elementor-managed homepage ──
+     * front-page.php runs after wp_head is flushed, so the_content() can't
+     * enqueue the page CSS in time. get_builder_content_for_display( id, true )
+     * returns the builder markup with its CSS embedded inline, so styling is
+     * reliable in this custom-template context. */
+    echo \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $front_id, true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 else :
     /* ── Native Sojourn homepage ───────────────────────────── */
