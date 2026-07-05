@@ -243,3 +243,29 @@ add_filter( 'rank_math/json_ld', function ( $data, $jsonld ) {
     ];
     return $data;
 }, 99, 2 );
+
+/* ── Newsletter form (shared by footer.php + [newsletter_form] shortcode) ──
+ * Extracted so the Elementor footer can embed the real, working form via a
+ * Shortcode widget instead of a static HTML copy (which would ship a stale
+ * nonce and silently fail on submit).
+ */
+function periodlk_newsletter_form(): string {
+    ob_start();
+    if ( function_exists( 'mc4wp_form' ) ) :
+        mc4wp_form();
+    else :
+        ?>
+        <form class="newsletter-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" novalidate>
+            <input type="hidden" name="action" value="period_lk_newsletter">
+            <?php wp_nonce_field( 'period_lk_newsletter', 'period_lk_nonce' ); ?>
+            <div class="newsletter-form__row">
+                <input type="email" name="email" class="newsletter-form__input" placeholder="Your email address" aria-label="<?php esc_attr_e( 'Email address', 'period-lk' ); ?>" required>
+                <button type="submit" class="btn btn--primary btn--pill"><?php esc_html_e( 'Subscribe', 'period-lk' ); ?></button>
+            </div>
+            <p class="newsletter-form__legal">By subscribing you agree to our <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">privacy policy</a>. Unsubscribe any time.</p>
+        </form>
+        <?php
+    endif;
+    return ob_get_clean();
+}
+add_shortcode( 'newsletter_form', 'periodlk_newsletter_form' );

@@ -12,19 +12,7 @@
           <h2 class="footer-newsletter__heading">Care that feels like care</h2>
           <p class="footer-newsletter__sub">Period tips, new arrivals, and the occasional love note. No spam, ever.</p>
         </div>
-        <?php if ( function_exists( 'mc4wp_form' ) ) : ?>
-          <?php mc4wp_form(); ?>
-        <?php else : ?>
-          <form class="newsletter-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" novalidate>
-            <input type="hidden" name="action" value="period_lk_newsletter">
-            <?php wp_nonce_field( 'period_lk_newsletter', 'period_lk_nonce' ); ?>
-            <div class="newsletter-form__row">
-              <input type="email" name="email" class="newsletter-form__input" placeholder="Your email address" aria-label="<?php esc_attr_e( 'Email address', 'period-lk' ); ?>" required>
-              <button type="submit" class="btn btn--primary btn--pill"><?php esc_html_e( 'Subscribe', 'period-lk' ); ?></button>
-            </div>
-            <p class="newsletter-form__legal">By subscribing you agree to our <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">privacy policy</a>. Unsubscribe any time.</p>
-          </form>
-        <?php endif; ?>
+        <?php echo periodlk_newsletter_form(); ?>
       </div>
     </div>
   </div>
