@@ -1,5 +1,18 @@
 </main><!-- #main-content -->
 
+<?php
+/**
+ * Elementor Pro Theme Builder support.
+ * elementor_theme_do_location() echoes the published Footer template that
+ * matches this request (if any) and returns true; if none matches, it
+ * returns false and the coded footer below renders as an automatic
+ * fallback. This wiring is also required for the Elementor editor itself
+ * to be able to open/edit Footer templates at all (its preview iframe
+ * looks for the wrapper this function outputs).
+ */
+if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'footer' ) ) :
+?>
+
 <!-- ── Site Footer ───────────────────────────────────────────── -->
 <footer class="site-footer" role="contentinfo">
 
@@ -122,6 +135,8 @@
   </div>
 
 </footer><!-- .site-footer -->
+
+<?php endif; ?>
 
 <?php wp_footer(); ?>
 </body>
