@@ -29,6 +29,9 @@ add_action( 'after_setup_theme', function () {
     add_theme_support( 'wc-product-gallery-lightbox' );
     add_theme_support( 'wc-product-gallery-slider' );
 
+    /* Elementor Pro Theme Builder (header/footer/single/archive locations) */
+    add_theme_support( 'elementor' );
+
     /* Block-editor color palette (Sojourn tokens) */
     add_theme_support( 'editor-color-palette', [
         [ 'name' => 'Wine',   'slug' => 'wine',   'color' => '#6a1b2a' ],

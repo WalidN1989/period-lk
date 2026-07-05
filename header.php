@@ -14,6 +14,16 @@
 
 <a class="skip-link screen-reader-text" href="#main-content"><?php esc_html_e( 'Skip to content', 'period-lk' ); ?></a>
 
+<?php
+/**
+ * Elementor Pro Theme Builder support.
+ * elementor_theme_do_location() echoes the published Header template that
+ * matches this request (if any) and returns true; if none matches, it
+ * returns false and the coded header below renders as an automatic fallback.
+ */
+if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'header' ) ) :
+?>
+
 <!-- ── Announcement Bar ──────────────────────────────────────── -->
 <div class="announcement-bar" role="region" aria-label="<?php esc_attr_e( 'Store announcements', 'period-lk' ); ?>">
   <div class="announcement-bar__track">
@@ -172,5 +182,7 @@
     </div>
   </div>
 </header>
+
+<?php endif; ?>
 
 <main id="main-content" class="site-main">
