@@ -283,7 +283,9 @@ add_action( 'template_redirect', function () {
         return;
     }
     $path = trim( (string) parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
-    if ( ! preg_match( '#^products/([^/]+)#', $path, $m ) ) {
+    // Old Hostinger-builder store URLs: /products/<slug> plus /ta/ and /si/
+    // language-prefixed variants — all indexed by Google before the WP rebuild.
+    if ( ! preg_match( '#^(?:ta/|si/)?products/([^/]+)#', $path, $m ) ) {
         return;
     }
     $slug = sanitize_title( $m[1] );
