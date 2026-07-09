@@ -269,3 +269,50 @@ function periodlk_newsletter_form(): string {
     return ob_get_clean();
 }
 add_shortcode( 'newsletter_form', 'periodlk_newsletter_form' );
+
+/* ── Legacy /products/ URL redirects ────────────────────────────
+ * Google has indexed Shopify-style /products/<slug> URLs for this site
+ * (imported competitor products get paraphrased titles/slugs on import,
+ * so the original slugs never exist here). WooCommerce serves
+ * /product/<slug>. 301 to the exact product when the slug exists, else
+ * the closest matching product, else the shop page — never a dead 404
+ * for product-intent traffic from search.
+ */
+add_action( 'template_redirect', function () {
+    if ( ! is_404() ) {
+        return;
+    }
+    $path = trim( (string) parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+    if ( ! preg_match( '#^products/([^/]+)#', $path, $m ) ) {
+        return;
+    }
+    $slug = sanitize_title( $m[1] );
+
+    // Exact slug match under the correct base
+    $post = get_page_by_path( $slug, OBJECT, 'product' );
+    if ( $post && 'publish' === $post->post_status ) {
+        wp_safe_redirect( get_permalink( $post ), 301 );
+        exit;
+    }
+
+    // Fuzzy match: the last two slug tokens are the most product-specific
+    // (e.g. elegant-lace-thong → "lace-thong" → charming-rose-lace-thong-…)
+    global $wpdb;
+    $tokens = array_values( array_filter( explode( '-', $slug ), fn( $t ) => strlen( $t ) > 2 ) );
+    if ( count( $tokens ) >= 2 ) {
+        $needle = implode( '-', array_slice( $tokens, -2 ) );
+        $id     = $wpdb->get_var( $wpdb->prepare(
+            "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'product' AND post_status = 'publish' AND post_name LIKE %s ORDER BY LENGTH(post_name) ASC LIMIT 1",
+            '%' . $wpdb->esc_like( $needle ) . '%'
+        ) );
+        if ( $id ) {
+            wp_safe_redirect( get_permalink( (int) $id ), 301 );
+            exit;
+        }
+    }
+
+    // No match — send product-intent traffic to the shop, not a dead end
+    $shop = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : '';
+    wp_safe_redirect( $shop ?: home_url( '/' ), 301 );
+    exit;
+} );
