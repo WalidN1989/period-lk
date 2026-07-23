@@ -11,6 +11,18 @@ define( 'PERIOD_LK_VERSION', '3.0.0' );
 define( 'PERIOD_LK_DIR',     get_template_directory() );
 define( 'PERIOD_LK_URI',     get_template_directory_uri() );
 
+/* ── Includes ───────────────────────────────────────────────────
+ * inc/ files were never required, so periodlk_contact_form() and the
+ * [contact_form] shortcode did not exist at runtime — page-contact.php
+ * would fatal on render. Load them properly.
+ */
+foreach ( [ 'contact-form' ] as $periodlk_inc ) {
+    $periodlk_inc_path = PERIOD_LK_DIR . '/inc/' . $periodlk_inc . '.php';
+    if ( file_exists( $periodlk_inc_path ) ) {
+        require_once $periodlk_inc_path;
+    }
+}
+
 /* ── Theme support ──────────────────────────────────────────── */
 add_action( 'after_setup_theme', function () {
     load_theme_textdomain( 'period-lk', PERIOD_LK_DIR . '/languages' );
